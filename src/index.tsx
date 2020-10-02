@@ -5,6 +5,7 @@ import {observer} from 'mobx-react';
 
 class AppState {
     @observable timer = 0;
+    @observable reseted = false;
 
     constructor() {
         setInterval(() => {
@@ -17,6 +18,7 @@ class AppState {
 
     resetTimer() {
         this.timer = 0;
+        this.reseted = true;
     }
 }
 
@@ -26,7 +28,7 @@ class TimerView extends React.Component<{appState: AppState}, {}> {
     render() {
         
         return (
-            <div>
+            <div style={this.props.appState.reseted ? {backgroundColor: 'red'} : null }>
                 <button onClick={this.onReset}>
                     Seconds passed: {this.props.appState.timer}
                 </button>
